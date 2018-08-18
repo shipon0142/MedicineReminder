@@ -18,5 +18,6 @@
         android:orderInCategory="100"
         app:showAsAction="never"
         android:title="@string/setting"
+
         />
 </menu>
