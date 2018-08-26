@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.shipon.medicinereminder.MainActivity">
+    tools:context="com.example.shipon.medicinereminder.activity.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/Toolbar"
@@ -82,4 +82,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+ <LinearLayout
+     android:orientation="vertical"
+     android:id="@+id/MainFragmentLayout"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+ </LinearLayout>
+
+
 </LinearLayout>

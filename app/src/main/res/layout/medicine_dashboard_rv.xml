@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="3dp">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:background="#36b6b4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <LinearLayout
+            android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+<TextView
+    android:id="@+id/MedicineNameTV"
+    android:layout_marginLeft="10dp"
+    android:textColor="#FFFFFF"
+    android:textSize="20sp"
+    android:gravity="center"
+    android:text="Napa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+         </LinearLayout>
+        <LinearLayout
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:textAllCaps="false"
+
+                android:id="@+id/DeleteTV"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:text="Delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+
+                android:gravity="center"
+                android:id="@+id/ViewTV"
+             android:text="View"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
