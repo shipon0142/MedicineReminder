@@ -99,7 +99,6 @@ public class MedicineByDateAdopter extends RecyclerView.Adapter<MedicineByDateAd
 
                                             public void onClick(DialogInterface dialog, int whichButton) {
 
-
                                                 MedicineManagementDatabase obj=new MedicineManagementDatabase(mContext);
                                                 obj.updateAllTime(takenTime,medicinePerRows.get(position).getMedicineTime(),medicinePerRows.get(position).getMedicineName());
                                                 medicinePerRows.get(position).setMedicineTime(takenTime);
