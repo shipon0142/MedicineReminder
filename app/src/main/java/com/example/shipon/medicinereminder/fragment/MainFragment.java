@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shipon.medicinereminder.Class.Medicine;
 import com.example.shipon.medicinereminder.Class.MedicinePerRow;
 import com.example.shipon.medicinereminder.R;
 import com.example.shipon.medicinereminder.activity.AddMedicineActivity;
@@ -59,18 +60,20 @@ public class MainFragment extends Fragment {
                 medicineSelected = "null";
             }
             ArrayList<MedicinePerRow> medicinePerRows = obj.retriveMedicineByDate(dateSelected, medicineSelected);
+
+            ArrayList<Medicine> medicine = obj.retriveAllMedicineInfo();
+           // Toast.makeText(getContext(),""+medicinePerRows.get(1).getMedicineTakenYesOrNo(),Toast.LENGTH_SHORT).show();
             if (medicinePerRows.size() != 0) {
                 Collections.sort(medicinePerRows, new Comparator<MedicinePerRow>() {
                     @Override
                     public int compare(MedicinePerRow o1, MedicinePerRow o2) {
-
                         return Integer.compare(o1.getHourMinSum(), o2.getHourMinSum());
                     }
                 });
             }
             LinearLayoutManager LayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             mListTv.setLayoutManager(LayoutManagaer);
-            MedicineByDateAdopter adapter = new MedicineByDateAdopter(getActivity(), medicinePerRows);
+            MedicineByDateAdopter adapter = new MedicineByDateAdopter(getActivity(), medicinePerRows,medicine);
             mListTv.setAdapter(adapter);
 
         } else {

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/MedicineDateLinearLayout"
         android:background="#5778e1"
         android:orientation="horizontal"
         android:layout_width="match_parent"

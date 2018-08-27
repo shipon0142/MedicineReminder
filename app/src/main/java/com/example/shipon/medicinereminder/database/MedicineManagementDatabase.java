@@ -83,15 +83,43 @@ public class MedicineManagementDatabase {
             do {
 
                 String mName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_NAME_TABLE2));
-                String mDate = cursor.getString(cursor.getColumnIndex(databaseHelper.MEDICINE_DATE));
-                String mTime = cursor.getString(cursor.getColumnIndex(databaseHelper.MEDICINE_TIME));
-                int takenYesOrNo = Integer.parseInt(String.valueOf(cursor.getColumnIndex(databaseHelper.MEDICINE_TAKEN_YES_OR_NO)));
+                String mDate = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_DATE));
+                String mTime = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TIME));
+               int takenYesOrNo = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO)));
+               // int takenYesOrNo = 0 ;
                 MedicineRow.add(new MedicinePerRow(mName, mDate, mTime, takenYesOrNo));
             } while (cursor.moveToNext());
         }
         return MedicineRow;
     }
+    public long update(String mName,String medicineType,String oldMedicineName){
+        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_NAME,mName);
+        contentValues.put(DatabaseHelper.MEDICINE_TYPE,medicineType);
+        ContentValues contentValue=new ContentValues();
+        contentValue.put(DatabaseHelper.MEDICINE_NAME_TABLE2,mName);
+        long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS,contentValues,databaseHelper.MEDICINE_NAME+" =? " ,new String[]{oldMedicineName});
+        long update2=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValue,databaseHelper.MEDICINE_NAME_TABLE2+" =? " ,new String[]{oldMedicineName});
 
+        return update2;
+    }
+    public long updateAllTime(String newTime,String oldTime,String medicineName){
+        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_TIME,newTime);
+       // long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS,contentValues,databaseHelper.MEDICINE_NAME+" =? " ,new String[]{oldMedicineName});
+        long update2=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValues,databaseHelper.MEDICINE_NAME_TABLE2+" =? and "+databaseHelper.MEDICINE_TIME+" =? " ,new String[]{medicineName,oldTime});
+        return update2;
+    }
+    public long updateTime(String newTime,String oldTime,String medicineName,String date){
+        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_TIME,newTime);
+        // long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS,contentValues,databaseHelper.MEDICINE_NAME+" =? " ,new String[]{oldMedicineName});
+        long update2=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValues,databaseHelper.MEDICINE_NAME_TABLE2+" =? and "+databaseHelper.MEDICINE_TIME+" =? and "+databaseHelper.MEDICINE_DATE+" =? " ,new String[]{medicineName,oldTime,date});
+        return update2;
+    }
     public long deleteMedicine(String name) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -115,6 +143,13 @@ public class MedicineManagementDatabase {
             } while (cursor.moveToNext());
         }
         return medicines;
+    }
+    public long updateTakenOrNotTaken(String mName,String date,String time, int taken) {
+        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO,taken);
+        long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValues,databaseHelper.MEDICINE_NAME_TABLE2+" =? and "+databaseHelper.MEDICINE_DATE+" =? and "+databaseHelper.MEDICINE_TIME+" =? " ,new String[]{mName,date,time});
+        return update1;
     }
 
     public long addMedicineDateTime(Medicine medicine) {
@@ -146,11 +181,8 @@ public class MedicineManagementDatabase {
                 contentValue.put(DatabaseHelper.MEDICINE_TIME, time.get(j));
                 contentValue.put(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO, medicine.getMedicineTakenYesOrNo());
                 insertedRow2 = sqLiteDatabas.insert(DatabaseHelper.TABLE_MEDICINE_DATE_TIME, null, contentValue);
-
             }
         }
-        Toast.makeText(context, "" + insertedRow2, Toast.LENGTH_SHORT).show();
-//GHJ
         return 0;
     }
 

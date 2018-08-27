@@ -19,6 +19,12 @@
             android:layout_height="?attr/actionBarSize"
             android:orientation="horizontal">
 
+            <ImageView
+                android:onClick="clickBack"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:layout_width="0dp"
@@ -29,11 +35,6 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_close_black_24dp" />
 
 
         </LinearLayout>

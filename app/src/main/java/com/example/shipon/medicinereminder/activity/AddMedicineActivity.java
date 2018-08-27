@@ -1,11 +1,14 @@
 package com.example.shipon.medicinereminder.activity;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AddMedicineActivity extends AppCompatActivity {
+    Toolbar toolbar;
     Spinner scheduleSpinner;
     RecyclerView scheduleRV;
     TextView pickDateTV;
@@ -42,13 +46,15 @@ public class AddMedicineActivity extends AppCompatActivity {
     private String[] M = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     String mType;
     int mPerday;
-    String startDate;
+    String startDate="null";
     public static ArrayList<String> takenTimeperday = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medicine);
+       // toolbar=findViewById(R.id.ToolbarAddActivity);
+
         scheduleSpinner = findViewById(R.id.ScheduleSpinner);
         scheduleRV = findViewById(R.id.schedueRecyclerView);
         pickDateTV = findViewById(R.id.PickDateTv);
@@ -58,6 +64,17 @@ public class AddMedicineActivity extends AppCompatActivity {
         durationET = findViewById(R.id.DurationET);
         submitBtn = findViewById(R.id.SubmitBtn);
         setClickListener();
+    }
+    @Override
+    public boolean  onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setClickListener() {
@@ -129,6 +146,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     public void clickOnSubmit(View view) {
         String medicineName = medicineNameET.getText().toString();
+
         int duration = Integer.parseInt(durationET.getText().toString());
         String medicineType = mType;
         int medicinePerday = mPerday;
@@ -138,9 +156,36 @@ public class AddMedicineActivity extends AppCompatActivity {
             takeTime.add(takenTime.get(i).getHour() + ":" + takenTime.get(i).getMinute());
         }
         int takenYesorNo = 0;
-        Medicine medicine = new Medicine(medicineName, duration, medicineType, medicinePerday, startingDate, takeTime, takenYesorNo);
-        MedicineManagementDatabase obj = new MedicineManagementDatabase(this);
-        obj.addMedicineDetails(medicine);
-        obj.addMedicineDateTime(medicine);
+        if(medicineName.equals("")){
+      Toast.makeText(this,"Please medicine name",Toast.LENGTH_SHORT).show();
+        }
+        else if(medicinePerday!=takeTime.size()){
+            Toast.makeText(this,"Please input schedule time",Toast.LENGTH_SHORT).show();
+        }
+        else if(startingDate.contains("null")){
+            Toast.makeText(this,"Please input date",Toast.LENGTH_SHORT).show();
+        }
+        else if(duration==0){
+            Toast.makeText(this,"Please input duration time",Toast.LENGTH_SHORT).show();
+        }
+
+
+        else {
+            Medicine medicine = new Medicine(medicineName, duration, medicineType, medicinePerday, startingDate, takeTime, takenYesorNo);
+            MedicineManagementDatabase obj = new MedicineManagementDatabase(this);
+            obj.addMedicineDetails(medicine);
+            obj.addMedicineDateTime(medicine);
+            finish();
+            Toast.makeText(this,"Medicine added succesful",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void closeAddMedicineActivity(View view) {
+        finish();
     }
 }

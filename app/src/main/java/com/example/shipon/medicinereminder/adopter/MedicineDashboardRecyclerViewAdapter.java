@@ -2,8 +2,11 @@ package com.example.shipon.medicinereminder.adopter;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.shipon.medicinereminder.Class.CustomDialogClass;
 import com.example.shipon.medicinereminder.Class.Medicine;
 import com.example.shipon.medicinereminder.Class.TakenTime;
 import com.example.shipon.medicinereminder.R;
@@ -34,8 +38,10 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
     public MedicineDashboardRecyclerViewAdapter(Context context, ArrayList<Medicine> medicine) {
         this.mInflater = LayoutInflater.from(context);
         //this.mClickListener =(ItemClickListener)context;
-        this.medicine = medicine;
         this.mContext = context;
+
+        MedicineManagementDatabase obj=new MedicineManagementDatabase(mContext);
+        this.medicine = obj.retriveAllMedicineInfo();
     }
 
     @Override
@@ -60,13 +66,15 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView medicinenameTV, deleteTV, viewTV;
+        TextView medicinenameTV, deleteTV, viewTV,updateTV;
 
         ViewHolder(View itemView) {
             super(itemView);
             medicinenameTV = itemView.findViewById(R.id.MedicineNameTV);
             deleteTV = itemView.findViewById(R.id.DeleteTV);
             viewTV = itemView.findViewById(R.id.ViewTV);
+            updateTV=itemView.findViewById(R.id.UpateTV);
+            updateTV.setOnClickListener(this);
             deleteTV.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
@@ -74,11 +82,27 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
         @Override
         public void onClick(View view) {
             if (view.equals(deleteTV)) {
-                MedicineManagementDatabase obj = new MedicineManagementDatabase(mContext);
-                long row = obj.deleteMedicine(medicine.get(getAdapterPosition()).getMedicineName());
-                Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
-                medicine.remove(getAdapterPosition());
-                notifyDataSetChanged();
+                new AlertDialog.Builder(mContext)
+                        .setMessage("Do you really want to Delete?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                MedicineManagementDatabase obj = new MedicineManagementDatabase(mContext);
+                                long row = obj.deleteMedicine(medicine.get(getAdapterPosition()).getMedicineName());
+
+                                medicine.remove(getAdapterPosition());
+                                notifyDataSetChanged();
+                                Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+
+            }
+            else if(view.equals(updateTV)){
+                CustomDialogClass cdd=new CustomDialogClass(mContext,medicine.get(getAdapterPosition()).getMedicineName()
+                        ,medicine.get(getAdapterPosition()).getMedicineDuration());
+
+                cdd.show();
             }
 
             //if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());

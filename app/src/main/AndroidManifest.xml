@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddMedicineActivity" />
-        <activity android:name=".activity.MedicinePreviewActivity"></activity>
+        <activity android:name=".activity.AddMedicineActivity" android:parentActivityName=".activity.MainActivity"/>
+        <activity android:name=".activity.MedicinePreviewActivity" android:parentActivityName=".activity.MainActivity"/>
     </application>
 
 </manifest>

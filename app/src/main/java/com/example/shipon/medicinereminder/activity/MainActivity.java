@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             Intent ii = new Intent(this, MedicinePreviewActivity.class);
             startActivity(ii);
         }
-        finish();
+
         return super.onOptionsItemSelected(item);
     }
 

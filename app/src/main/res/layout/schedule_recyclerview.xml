@@ -14,13 +14,13 @@ android:layout_marginRight="10dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:foregroundGravity="center"
-        android:minWidth="80dp"
+        android:minWidth="120dp"
         app:cardBackgroundColor="#57bfe1">
 
 
         <TextView
             android:textColor="#000000"
-      android:drawableLeft="@drawable/ic_timer_black_24dp"
+android:textSize="16sp"
 
             android:text="Pick a time"
             android:id="@+id/PickTimeTV"

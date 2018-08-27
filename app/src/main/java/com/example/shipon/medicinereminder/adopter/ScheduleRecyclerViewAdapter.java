@@ -63,14 +63,33 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                             }
                         }
                         takenTime.add(new TakenTime(i, i1, position));
-                        holder.pickTimeTV.setText(i + ":" + i1);
+                        holder.pickTimeTV.setText(getTime1(i,i1));
                         holder.pickTimeTV.setTextColor(Color.BLACK);
-                        Toast.makeText(mContext, "" + takenTime.size(), Toast.LENGTH_SHORT).show();
                     }
                 }, hour, minute, false);
                 timePickerDialog.show();
             }
         });
+    }
+    public String getTime1(int hh,int mm) {
+        String AM_PM = null;
+
+        int h = hh;
+        int m=mm;
+        if (h >= 13) {
+            h = h % 12;
+            AM_PM = "PM";
+        } else if (h == 0) {
+            h = 12;
+            AM_PM = "AM";
+        } else if (h == 12) {
+            AM_PM = "PM";
+        } else {
+            AM_PM = "AM";
+        }
+
+        return h + ":" + m + " " + AM_PM;
+
     }
 
     @Override

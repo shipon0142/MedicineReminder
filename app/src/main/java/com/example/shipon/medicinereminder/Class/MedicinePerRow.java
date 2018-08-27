@@ -13,7 +13,17 @@ public class MedicinePerRow {
     private String medicineName;
     private String medicineType;
     private String medicineTakenDate;
+
+    public void setMedicineTime(String medicineTime) {
+        this.medicineTime = medicineTime;
+    }
+
     private String medicineTime;
+
+    public void setMedicineTakenYesOrNo(int medicineTakenYesOrNo) {
+        this.medicineTakenYesOrNo = medicineTakenYesOrNo;
+    }
+
     private int medicineTakenYesOrNo;
     private String hourminsum;
 

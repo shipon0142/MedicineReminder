@@ -30,7 +30,24 @@
         <LinearLayout
             android:layout_marginRight="5dp"
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:textAllCaps="false"
+
+                android:id="@+id/UpateTV"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:text="Update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:layout_weight="1.5"
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <TextView
@@ -47,7 +64,7 @@
         <LinearLayout
 
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <TextView

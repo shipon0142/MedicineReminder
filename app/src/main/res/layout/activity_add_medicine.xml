@@ -21,7 +21,6 @@
             android:layout_height="?attr/actionBarSize"
             android:orientation="horizontal">
 
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -32,6 +31,8 @@
                 android:textSize="20sp" />
 
             <ImageView
+                android:onClick="closeAddMedicineActivity"
+                android:layout_marginRight="10dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -151,6 +152,7 @@
 
 
                     <TextView
+                        android:layout_marginBottom="5dp"
                         android:id="@+id/PickDateTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
