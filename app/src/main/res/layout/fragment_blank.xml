@@ -6,11 +6,11 @@
     tools:context="com.example.shipon.medicinereminder.fragment.MedicineDashboardFragment">
 
     <!-- TODO: Update blank fragment layout -->
- <android.support.v7.widget.RecyclerView
-     android:id="@+id/MedicinePreviewRV"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/MedicinePreviewRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
- </android.support.v7.widget.RecyclerView>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

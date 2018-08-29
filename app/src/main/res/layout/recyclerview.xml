@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_marginTop="3dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
     android:layout_marginLeft="2dp"
     android:layout_marginRight="2dp"
-    android:layout_marginBottom="3dp"
-    android:layout_height="wrap_content">
+    android:layout_marginTop="3dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/MedicineCV"
@@ -16,15 +16,15 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:foregroundGravity="center"
-        android:minWidth="80dp"
-        app:cardBackgroundColor="#57bfe1">
+        android:minWidth="150dp"
+        app:cardBackgroundColor="@color/meColor">
 
         <TextView
-            android:textColor="#FFFFFF"
             android:id="@+id/MedicineName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/black2"
             android:textSize="16sp" />
     </android.support.v7.widget.CardView>
 

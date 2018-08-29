@@ -3,6 +3,7 @@ package com.example.shipon.medicinereminder.adopter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,16 +21,20 @@ import java.util.List;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     List<CardView> itemViewList = new ArrayList<>();
+    List<TextView> TextViewList = new ArrayList<>();
     private LayoutInflater mInflater;
     private Context mContext;
     private ItemClickListener mClickListener;
     ArrayList<String> MadicineName;
+    String NAME;
 
-    public MyRecyclerViewAdapter(Context context, ArrayList<String> MadicineName) {
+    public MyRecyclerViewAdapter(Context context, ArrayList<String> MadicineName, String NAME) {
         this.mInflater = LayoutInflater.from(context);
         this.mClickListener = (ItemClickListener) context;
         this.MadicineName = MadicineName;
         this.mContext = context;
+        this.NAME = NAME;
+
     }
 
     @Override
@@ -42,6 +47,20 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.medicineName.setText(MadicineName.get(position).toString());
+        if (MadicineName.contains(NAME)) {
+            if (holder.medicineName.getText().equals(NAME)) {
+                holder.medicineName.setTextSize(25);
+                holder.medicineName.setTextColor(ContextCompat.getColor(mContext,
+                        R.color.WHITE));
+                holder.medicineCV.setCardBackgroundColor(Color.parseColor("#5778e1"));
+            }
+        } else if (position == 0) {
+            holder.medicineCV.setCardBackgroundColor(Color.parseColor("#5778e1"));
+            holder.medicineName.setTextColor(ContextCompat.getColor(mContext,
+                    R.color.WHITE));
+        } else {
+            holder.medicineName.setTextSize(15);
+        }
 
     }
 
@@ -60,6 +79,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             medicineName = itemView.findViewById(R.id.MedicineName);
             medicineCV = itemView.findViewById(R.id.MedicineCV);
             itemViewList.add(medicineCV);
+            TextViewList.add(medicineName);
             itemView.setOnClickListener(this);
 
         }
@@ -71,14 +91,22 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     card.setCardBackgroundColor(Color.parseColor("#5778e1"));
                 } else card.setCardBackgroundColor(Color.parseColor("#57bfe1"));
             }
+            for (TextView textView : TextViewList) {
+                if (TextViewList.get(getAdapterPosition()) == textView) {
+                    textView.setTextSize(25);
+                    textView.setTextColor(ContextCompat.getColor(mContext,
+                            R.color.WHITE));
+                } else {
+                    textView.setTextSize(15);
+                    textView.setTextColor(ContextCompat.getColor(mContext,
+                            R.color.black2));
+                }
+            }
 
             if (mClickListener != null) {
                 mClickListener.onItemClick(view, getAdapterPosition());
-
                 // medicineCV.setCardBackgroundColor(Color.parseColor("#5778e1"));
-
             }
-
         }
     }
 

@@ -46,15 +46,13 @@ public class AddMedicineActivity extends AppCompatActivity {
     private String[] M = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     String mType;
     int mPerday;
-    String startDate="null";
+    String startDate = "null";
     public static ArrayList<String> takenTimeperday = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medicine);
-       // toolbar=findViewById(R.id.ToolbarAddActivity);
-
         scheduleSpinner = findViewById(R.id.ScheduleSpinner);
         scheduleRV = findViewById(R.id.schedueRecyclerView);
         pickDateTV = findViewById(R.id.PickDateTv);
@@ -65,8 +63,9 @@ public class AddMedicineActivity extends AppCompatActivity {
         submitBtn = findViewById(R.id.SubmitBtn);
         setClickListener();
     }
+
     @Override
-    public boolean  onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
@@ -89,7 +88,6 @@ public class AddMedicineActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         tabletOrLiquiedQuantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -156,27 +154,21 @@ public class AddMedicineActivity extends AppCompatActivity {
             takeTime.add(takenTime.get(i).getHour() + ":" + takenTime.get(i).getMinute());
         }
         int takenYesorNo = 0;
-        if(medicineName.equals("")){
-      Toast.makeText(this,"Please medicine name",Toast.LENGTH_SHORT).show();
-        }
-        else if(medicinePerday!=takeTime.size()){
-            Toast.makeText(this,"Please input schedule time",Toast.LENGTH_SHORT).show();
-        }
-        else if(startingDate.contains("null")){
-            Toast.makeText(this,"Please input date",Toast.LENGTH_SHORT).show();
-        }
-        else if(duration==0){
-            Toast.makeText(this,"Please input duration time",Toast.LENGTH_SHORT).show();
-        }
-
-
-        else {
+        if (medicineName.equals("")) {
+            Toast.makeText(this, "Please medicine name", Toast.LENGTH_SHORT).show();
+        } else if (medicinePerday != takeTime.size()) {
+            Toast.makeText(this, "Please input schedule time", Toast.LENGTH_SHORT).show();
+        } else if (startingDate.contains("null")) {
+            Toast.makeText(this, "Please input date", Toast.LENGTH_SHORT).show();
+        } else if (duration == 0) {
+            Toast.makeText(this, "Please input duration time", Toast.LENGTH_SHORT).show();
+        } else {
             Medicine medicine = new Medicine(medicineName, duration, medicineType, medicinePerday, startingDate, takeTime, takenYesorNo);
             MedicineManagementDatabase obj = new MedicineManagementDatabase(this);
             obj.addMedicineDetails(medicine);
             obj.addMedicineDateTime(medicine);
             finish();
-            Toast.makeText(this,"Medicine added succesful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Medicine added succesful", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -187,5 +179,23 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     public void closeAddMedicineActivity(View view) {
         finish();
+    }
+
+    public void negativeClick(View view) {
+        if (durationET.getText().toString().equals("")) durationET.setText("0");
+        int duration = Integer.parseInt(durationET.getText().toString());
+        if (duration > 0) {
+            duration--;
+            durationET.setText("" + duration);
+        }
+    }
+
+    public void posotiveClick(View view) {
+        if (durationET.getText().toString().equals("")) durationET.setText("0");
+        int duration = Integer.parseInt(durationET.getText().toString());
+        if (duration >= 0) {
+            duration++;
+            durationET.setText("" + duration);
+        }
     }
 }

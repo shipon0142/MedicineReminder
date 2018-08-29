@@ -15,6 +15,18 @@
     <string name="start_date">Start date</string>
     <string name="duration">Duration</string>
     <string name="minus">-</string>
+    <string name="duration_days">Duration(days)</string>
+    <string name="_0">0</string>
+    <string name="plus">+</string>
+    <string name="medicine_type">Medicine Type</string>
+    <string name="no_medicine_found">No medicine found</string>
+    <string name="medicine_dashboard">Medicine Dashboard</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="resedule">Resedule</string>
+    <string name="not_taken">Not taken</string>
+    <string name="taken">Taken</string>
+    <string name="all_medicine">All medicine</string>
 
     <string-array name="schedule_arrays">
         <item>Once a day</item>

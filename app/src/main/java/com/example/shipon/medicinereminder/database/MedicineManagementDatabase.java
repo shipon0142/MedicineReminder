@@ -23,6 +23,7 @@ public class MedicineManagementDatabase {
     long insertedRow2;
     Context context;
     ArrayList<MedicinePerRow> MedicineRow = new ArrayList<>();
+    ArrayList<String> MedicineName = new ArrayList<>();
 
     public MedicineManagementDatabase(Context context) {
         this.context = context;
@@ -85,41 +86,83 @@ public class MedicineManagementDatabase {
                 String mName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_NAME_TABLE2));
                 String mDate = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_DATE));
                 String mTime = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TIME));
-               int takenYesOrNo = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO)));
-               // int takenYesOrNo = 0 ;
+                int takenYesOrNo = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO)));
+                // int takenYesOrNo = 0 ;
                 MedicineRow.add(new MedicinePerRow(mName, mDate, mTime, takenYesOrNo));
             } while (cursor.moveToNext());
         }
         return MedicineRow;
     }
-    public long update(String mName,String medicineType,String oldMedicineName){
-        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(DatabaseHelper.MEDICINE_NAME,mName);
-        contentValues.put(DatabaseHelper.MEDICINE_TYPE,medicineType);
-        ContentValues contentValue=new ContentValues();
-        contentValue.put(DatabaseHelper.MEDICINE_NAME_TABLE2,mName);
-        long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS,contentValues,databaseHelper.MEDICINE_NAME+" =? " ,new String[]{oldMedicineName});
-        long update2=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValue,databaseHelper.MEDICINE_NAME_TABLE2+" =? " ,new String[]{oldMedicineName});
+
+    public ArrayList<String> retriveMedicineNameByDate(String date) {
+        MedicineName.clear();
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+        String selectQuery = "Select * from " + DatabaseHelper.TABLE_MEDICINE_DATE_TIME + " where " + databaseHelper.MEDICINE_DATE + " = ? ";
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, new String[]{date}, null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                String mName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_NAME_TABLE2));
+
+                //int takenYesOrNo = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO)));
+                // int takenYesOrNo = 0 ;
+                MedicineName.add(new String(mName));
+            } while (cursor.moveToNext());
+        }
+        return MedicineName;
+    }
+
+    public ArrayList<MedicinePerRow> retriveAllDateTime() {
+        ArrayList<MedicinePerRow> row = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getReadableDatabase();
+        String selectQuery = "Select * from " + DatabaseHelper.TABLE_MEDICINE_DATE_TIME;
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                String mName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_NAME_TABLE2));
+                String mDate = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_DATE));
+                String mTime = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TIME));
+
+                int takenYesOrNo = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO)));
+                // int takenYesOrNo = 0 ;
+                row.add(new MedicinePerRow(mName, mDate, mTime, takenYesOrNo));
+            } while (cursor.moveToNext());
+        }
+        return row;
+    }
+
+    public long update(String mName, String medicineType, String oldMedicineName) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_NAME, mName);
+        contentValues.put(DatabaseHelper.MEDICINE_TYPE, medicineType);
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(DatabaseHelper.MEDICINE_NAME_TABLE2, mName);
+        long update1 = sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS, contentValues, databaseHelper.MEDICINE_NAME + " =? ", new String[]{oldMedicineName});
+        long update2 = sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME, contentValue, databaseHelper.MEDICINE_NAME_TABLE2 + " =? ", new String[]{oldMedicineName});
 
         return update2;
     }
-    public long updateAllTime(String newTime,String oldTime,String medicineName){
-        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(DatabaseHelper.MEDICINE_TIME,newTime);
-       // long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS,contentValues,databaseHelper.MEDICINE_NAME+" =? " ,new String[]{oldMedicineName});
-        long update2=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValues,databaseHelper.MEDICINE_NAME_TABLE2+" =? and "+databaseHelper.MEDICINE_TIME+" =? " ,new String[]{medicineName,oldTime});
-        return update2;
-    }
-    public long updateTime(String newTime,String oldTime,String medicineName,String date){
-        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(DatabaseHelper.MEDICINE_TIME,newTime);
+
+    public long updateAllTime(String newTime, String oldTime, String medicineName) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_TIME, newTime);
         // long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS,contentValues,databaseHelper.MEDICINE_NAME+" =? " ,new String[]{oldMedicineName});
-        long update2=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValues,databaseHelper.MEDICINE_NAME_TABLE2+" =? and "+databaseHelper.MEDICINE_TIME+" =? and "+databaseHelper.MEDICINE_DATE+" =? " ,new String[]{medicineName,oldTime,date});
+        long update2 = sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME, contentValues, databaseHelper.MEDICINE_NAME_TABLE2 + " =? and " + databaseHelper.MEDICINE_TIME + " =? ", new String[]{medicineName, oldTime});
         return update2;
     }
+
+    public long updateTime(String newTime, String oldTime, String medicineName, String date) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_TIME, newTime);
+        // long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DETAILS,contentValues,databaseHelper.MEDICINE_NAME+" =? " ,new String[]{oldMedicineName});
+        long update2 = sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME, contentValues, databaseHelper.MEDICINE_NAME_TABLE2 + " =? and " + databaseHelper.MEDICINE_TIME + " =? and " + databaseHelper.MEDICINE_DATE + " =? ", new String[]{medicineName, oldTime, date});
+        return update2;
+    }
+
     public long deleteMedicine(String name) {
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -144,11 +187,12 @@ public class MedicineManagementDatabase {
         }
         return medicines;
     }
-    public long updateTakenOrNotTaken(String mName,String date,String time, int taken) {
-        SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO,taken);
-        long update1=sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME,contentValues,databaseHelper.MEDICINE_NAME_TABLE2+" =? and "+databaseHelper.MEDICINE_DATE+" =? and "+databaseHelper.MEDICINE_TIME+" =? " ,new String[]{mName,date,time});
+
+    public long updateTakenOrNotTaken(String mName, String date, String time, int taken) {
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.MEDICINE_TAKEN_YES_OR_NO, taken);
+        long update1 = sqLiteDatabase.update(DatabaseHelper.TABLE_MEDICINE_DATE_TIME, contentValues, databaseHelper.MEDICINE_NAME_TABLE2 + " =? and " + databaseHelper.MEDICINE_DATE + " =? and " + databaseHelper.MEDICINE_TIME + " =? ", new String[]{mName, date, time});
         return update1;
     }
 

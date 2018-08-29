@@ -62,7 +62,7 @@ public class MainFragment extends Fragment {
             ArrayList<MedicinePerRow> medicinePerRows = obj.retriveMedicineByDate(dateSelected, medicineSelected);
 
             ArrayList<Medicine> medicine = obj.retriveAllMedicineInfo();
-           // Toast.makeText(getContext(),""+medicinePerRows.get(1).getMedicineTakenYesOrNo(),Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getContext(),""+medicinePerRows.get(1).getMedicineTakenYesOrNo(),Toast.LENGTH_SHORT).show();
             if (medicinePerRows.size() != 0) {
                 Collections.sort(medicinePerRows, new Comparator<MedicinePerRow>() {
                     @Override
@@ -73,7 +73,7 @@ public class MainFragment extends Fragment {
             }
             LinearLayoutManager LayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             mListTv.setLayoutManager(LayoutManagaer);
-            MedicineByDateAdopter adapter = new MedicineByDateAdopter(getActivity(), medicinePerRows,medicine);
+            MedicineByDateAdopter adapter = new MedicineByDateAdopter(getActivity(), medicinePerRows, medicine);
             mListTv.setAdapter(adapter);
 
         } else {
@@ -113,17 +113,6 @@ public class MainFragment extends Fragment {
         mListener = null;
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

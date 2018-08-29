@@ -27,19 +27,19 @@ import com.example.shipon.medicinereminder.database.MedicineManagementDatabase;
 
 public class CustomDialogClass extends Dialog implements android.view.View.OnClickListener {
     public Context mContext;
-    public EditText dialogMedicineNameET,dialogMedicineDurationET;
-    Spinner spinnerTabletType,spinnerTabletQuantity;
+    public EditText dialogMedicineNameET, dialogMedicineDurationET;
+    Spinner spinnerTabletType, spinnerTabletQuantity;
     public Button submitUpdate;
     String mName;
     int duration;
     String mType;
 
-    public CustomDialogClass(Context a, String mName,int duration) {
+    public CustomDialogClass(Context a, String mName, int duration) {
         super(a);
         // TODO Auto-generated constructor stub
         this.mContext = a;
-        this.mName=mName;
-        this.duration=duration;
+        this.mName = mName;
+        this.duration = duration;
     }
 
     @Override
@@ -47,17 +47,18 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
-       dialogMedicineNameET=findViewById(R.id.DialogMedicineNameET);
-       spinnerTabletType=findViewById(R.id.DialogTabletOrLiquiedSpinner);
-       spinnerTabletQuantity=findViewById(R.id.DialogTabletOrLiquiedQuantitySpinner);
-       submitUpdate=findViewById(R.id.DialogSubmit);
-       dialogMedicineNameET.setText(mName);
-       addListener();
+        dialogMedicineNameET = findViewById(R.id.DialogMedicineNameET);
+        spinnerTabletType = findViewById(R.id.DialogTabletOrLiquiedSpinner);
+        spinnerTabletQuantity = findViewById(R.id.DialogTabletOrLiquiedQuantitySpinner);
+        submitUpdate = findViewById(R.id.DialogSubmit);
+        dialogMedicineNameET.setText(mName);
+        addListener();
         submitUpdate.setOnClickListener(this);
 
 
     }
-    public void addListener(){
+
+    public void addListener() {
         final SpinnerAdapter adapter1 = ArrayAdapter.createFromResource(mContext, R.array.tablet_arrays, android.R.layout.simple_spinner_dropdown_item);
         final SpinnerAdapter adapter2 = ArrayAdapter.createFromResource(mContext, R.array.liquied_arrays, android.R.layout.simple_spinner_dropdown_item);
         spinnerTabletType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -89,25 +90,27 @@ public class CustomDialogClass extends Dialog implements android.view.View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.DialogSubmit:
-                MedicineManagementDatabase obj=new MedicineManagementDatabase(mContext);
-               long i= obj.update(dialogMedicineNameET.getText().toString(),mType,mName);
-              if (i!=0){
-                  Toast.makeText(mContext,"Updated",Toast.LENGTH_SHORT).show();
-                  //relunch();
+                MedicineManagementDatabase obj = new MedicineManagementDatabase(mContext);
+                long i = obj.update(dialogMedicineNameET.getText().toString(), mType, mName);
+                if (i != 0) {
+                    Toast.makeText(mContext, "Updated", Toast.LENGTH_SHORT).show();
+                    //relunch();
 
-              }
+                }
                 break;
             default:
                 break;
         }
         dismiss();
     }
-    public void relunch(){
-        Intent i=new Intent(mContext,MedicinePreviewActivity.class);
+
+    public void relunch() {
+        Intent i = new Intent(mContext, MedicinePreviewActivity.class);
         mContext.startActivity(i);
 
     }
-    public void update(String mName,int duration,String medicineType){
+
+    public void update(String mName, int duration, String medicineType) {
 
     }
 }

@@ -63,7 +63,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
                             }
                         }
                         takenTime.add(new TakenTime(i, i1, position));
-                        holder.pickTimeTV.setText(getTime1(i,i1));
+                        holder.pickTimeTV.setText(getTime1(i, i1));
                         holder.pickTimeTV.setTextColor(Color.BLACK);
                     }
                 }, hour, minute, false);
@@ -71,11 +71,12 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
             }
         });
     }
-    public String getTime1(int hh,int mm) {
+
+    public String getTime1(int hh, int mm) {
         String AM_PM = null;
 
         int h = hh;
-        int m=mm;
+        int m = mm;
         if (h >= 13) {
             h = h % 12;
             AM_PM = "PM";

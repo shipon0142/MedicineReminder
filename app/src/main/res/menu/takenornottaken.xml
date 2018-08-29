@@ -4,18 +4,14 @@
     <item
         android:id="@+id/TakenID"
         android:orderInCategory="1"
-        android:title="Taken" />
+        android:title="@string/taken" />
     <item
         android:id="@+id/NotTakenID"
-
         android:orderInCategory="2"
-        android:title="Not taken"
-        />
+        android:title="@string/not_taken" />
     <item
         android:id="@+id/ResuduleID"
-
         android:orderInCategory="3"
-        android:title="Resedule"
-        />
+        android:title="@string/resedule" />
 
 </menu>

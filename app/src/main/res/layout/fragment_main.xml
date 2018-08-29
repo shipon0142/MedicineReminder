@@ -8,32 +8,34 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mListRv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-     <TextView
-         android:textColor="#000000"
-         android:textSize="15sp"
-         android:layout_marginRight="60dp"
-         android:layout_marginBottom="25dp"
-         android:layout_gravity="right|bottom"
-         android:text="Add medicine"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="25dp"
+            android:layout_marginRight="60dp"
+            android:text="@string/add_medicine"
+            android:textColor="@color/blue"
+            android:textSize="15sp" />
+
         <TextView
             android:id="@+id/AddTV"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/circle"
-            android:text="+"
-            android:layout_gravity="right|bottom"
             android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:text="@string/plus"
+            android:textColor="@color/WHITE"
+            android:textSize="15sp" />
 
 
     </FrameLayout>

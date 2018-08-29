@@ -1,58 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
     android:layout_marginLeft="2dp"
     android:layout_marginRight="2dp"
-    android:layout_marginBottom="3dp">
+    android:orientation="vertical">
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/MedicineDateLinearLayout"
-        android:background="#5778e1"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <LinearLayout
-            android:layout_weight="2.5"
-        android:layout_width="0dp"
-        android:layout_height="match_parent">
-<TextView
-    android:id="@+id/TimeTV"
-    android:layout_marginLeft="10dp"
-    android:textColor="#FFFFFF"
-    android:textSize="16sp"
-    android:gravity="center"
-    android:text="8:00 PM"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
-         </LinearLayout>
-        <LinearLayout
-            android:layout_weight="6"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/RemainingTV"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:text="9 hours left to take"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/DotsIV"
-                 android:layout_gravity="center"
-                android:src="@drawable/ic_more_horiz_black_24dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/MedicineDateLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/lightBlue"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <TextView
+                    android:id="@+id/TimeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/WHITE"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6">
+
+                <TextView
+                    android:id="@+id/RemainingTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/WHITE"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <ImageView
+                    android:id="@+id/DotsIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_more_horiz_black_24dp" />
+            </LinearLayout>
+
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

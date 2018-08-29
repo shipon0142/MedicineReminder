@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context="com.example.shipon.medicinereminder.activity.MainActivity">
 
@@ -12,7 +13,7 @@
         theme="@style/MyToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#277edf"
+        android:background="@color/blue"
         app:popupTheme="@style/Theme.AppCompat.NoActionBar">
 
         <LinearLayout
@@ -35,13 +36,7 @@
                     android:gravity="left"
                     android:src="@drawable/ic_account_circle_black_24dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Patient"
-                    android:textColor="@color/WHITE" />
+
             </LinearLayout>
 
             <TextView
@@ -50,13 +45,9 @@
                 android:layout_weight="10"
                 android:gravity="center"
                 android:text="@string/title"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/WHITE"
                 android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"></LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
@@ -65,8 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#cfd8dc"
-        app:textColorNormal="#808080"
-        app:textColorSelected="#277edf"
+        app:textColorNormal="@color/gray"
+        app:textColorSelected="@color/blue"
         app:textSizeDayName="12sp"
         app:textSizeDayNumber="14sp"
         app:textSizeMonthName="12sp" />
@@ -82,13 +73,39 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
- <LinearLayout
-     android:orientation="vertical"
-     android:id="@+id/MainFragmentLayout"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent">
 
- </LinearLayout>
+    <LinearLayout
+        android:id="@+id/NoMedicineLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/no_me" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_medicine_found"
+            android:textColor="@color/blue"
+            android:textSize="25sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/MainFragmentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
 
 </LinearLayout>

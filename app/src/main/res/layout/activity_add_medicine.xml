@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d5d5d7"
+    android:background="@color/blue"
     android:orientation="vertical"
     tools:context="com.example.shipon.medicinereminder.activity.AddMedicineActivity">
 
@@ -13,7 +13,7 @@
         theme="@style/MyToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#277edf"
+        android:background="@color/blue"
         app:popupTheme="@style/Theme.AppCompat.NoActionBar">
 
         <LinearLayout
@@ -27,15 +27,15 @@
                 android:layout_weight="10"
                 android:gravity="center"
                 android:text="@string/add_medicine"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/WHITE"
                 android:textSize="20sp" />
 
             <ImageView
-                android:onClick="closeAddMedicineActivity"
-                android:layout_marginRight="10dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:onClick="closeAddMedicineActivity"
                 android:src="@drawable/ic_close_black_24dp" />
 
         </LinearLayout>
@@ -54,24 +54,29 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:foregroundGravity="center"
+                android:minHeight="100dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:orientation="vertical">
 
 
                     <TextView
-
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/medicine_name"
                         android:textColor="@color/blue"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
 
                     <EditText
@@ -87,89 +92,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp">
-
-                <LinearLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/schedule"
-                        android:textColor="#277edf"
-                        android:textSize="20sp" />
-
-
-                    <Spinner
-                        android:id="@+id/ScheduleSpinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:entries="@array/schedule_arrays"
-                        android:gravity="center"
-                        android:spinnerMode="dialog">
-
-                    </Spinner>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/schedueRecyclerView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="3dp">
-
-                    </android.support.v7.widget.RecyclerView>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/start_date"
-                        android:textColor="#277edf"
-                        android:textSize="20sp" />
-
-
-                    <TextView
-                        android:layout_marginBottom="5dp"
-                        android:id="@+id/PickDateTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Pick date"
-                        android:textSize="16sp" />
-
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="100dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -181,22 +107,108 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="@string/duration"
-                        android:textColor="#277edf"
-                        android:textSize="20sp" />
+                        android:text="@string/schedule"
+                        android:textColor="@color/blue"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/ScheduleSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:entries="@array/schedule_arrays"
+                        android:gravity="center"
+                        android:spinnerMode="dialog"></Spinner>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/schedueRecyclerView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"></android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="100dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/start_date"
+                        android:textColor="@color/blue"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/meColor">
+
+                        <TextView
+                            android:id="@+id/PickDateTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/meColor"
+                            android:gravity="center"
+                            android:minWidth="150dp"
+                            android:text="Pick date"
+                            android:textColor="@color/black2"
+                            android:textSize="16sp" />
+                    </android.support.v7.widget.CardView>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="100dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/duration_days"
+                        android:textColor="@color/blue"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <Button
-                            android:layout_width="40dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#858588"
+                            android:backgroundTint="@color/meColor"
                             android:gravity="center"
-
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
+                            android:onClick="negativeClick"
                             android:text="@string/minus"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat"
                             android:textColor="#FFFFFF" />
@@ -204,23 +216,21 @@
                         <EditText
                             android:id="@+id/DurationET"
                             android:layout_width="50dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@drawable/edit_text_style"
                             android:gravity="center"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:text="0"
+                            android:inputType="number"
+                            android:text="@string/_0"
                             android:textAllCaps="false" />
 
                         <Button
-                            android:layout_width="40dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#858588"
-                            android:drawableTint="#000000"
+                            android:backgroundTint="#57bfe1"
+                            android:drawableTint="@color/black2"
                             android:gravity="center"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:text="+"
+                            android:onClick="posotiveClick"
+                            android:text="@string/plus"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat"
                             android:textColor="#FFFFFF" />
                     </LinearLayout>
@@ -230,24 +240,26 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="100dp">
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Medicine Type"
+                        android:text="@string/medicine_type"
                         android:textColor="#277edf"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -255,13 +267,10 @@
                         android:layout_gravity="center"
                         android:orientation="horizontal">
 
-
                         <Spinner
                             android:id="@+id/TabletOrLiquiedSpinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
-
                             android:entries="@array/take_arrays"
                             android:spinnerMode="dialog" />
 
@@ -270,7 +279,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dialog" />
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -282,18 +290,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:background="@color/WHITE">
 
         <Button
-
             android:id="@+id/SubmitBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FF1142E4"
+            android:layout_margin="2dp"
+            android:background="@color/blue"
             android:onClick="clickOnSubmit"
             android:text="Submit"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/WHITE"
             android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>

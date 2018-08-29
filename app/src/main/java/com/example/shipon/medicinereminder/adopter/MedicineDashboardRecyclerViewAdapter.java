@@ -40,7 +40,7 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
         //this.mClickListener =(ItemClickListener)context;
         this.mContext = context;
 
-        MedicineManagementDatabase obj=new MedicineManagementDatabase(mContext);
+        MedicineManagementDatabase obj = new MedicineManagementDatabase(mContext);
         this.medicine = obj.retriveAllMedicineInfo();
     }
 
@@ -66,14 +66,13 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView medicinenameTV, deleteTV, viewTV,updateTV;
+        TextView medicinenameTV, deleteTV, viewTV, updateTV;
 
         ViewHolder(View itemView) {
             super(itemView);
             medicinenameTV = itemView.findViewById(R.id.MedicineNameTV);
             deleteTV = itemView.findViewById(R.id.DeleteTV);
-            viewTV = itemView.findViewById(R.id.ViewTV);
-            updateTV=itemView.findViewById(R.id.UpateTV);
+            updateTV = itemView.findViewById(R.id.UpateTV);
             updateTV.setOnClickListener(this);
             deleteTV.setOnClickListener(this);
             itemView.setOnClickListener(this);
@@ -94,13 +93,13 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
                                 medicine.remove(getAdapterPosition());
                                 notifyDataSetChanged();
                                 Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
-                            }})
+                            }
+                        })
                         .setNegativeButton(android.R.string.no, null).show();
 
-            }
-            else if(view.equals(updateTV)){
-                CustomDialogClass cdd=new CustomDialogClass(mContext,medicine.get(getAdapterPosition()).getMedicineName()
-                        ,medicine.get(getAdapterPosition()).getMedicineDuration());
+            } else if (view.equals(updateTV)) {
+                CustomDialogClass cdd = new CustomDialogClass(mContext, medicine.get(getAdapterPosition()).getMedicineName()
+                        , medicine.get(getAdapterPosition()).getMedicineDuration());
 
                 cdd.show();
             }
