@@ -80,11 +80,12 @@
 
 
                     <EditText
+
                         android:id="@+id/MedicineNameET"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black2" />
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
