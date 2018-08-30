@@ -92,7 +92,7 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
 
                                 medicine.remove(getAdapterPosition());
                                 notifyDataSetChanged();
-                                Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();
