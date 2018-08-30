@@ -27,6 +27,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ItemClickListener mClickListener;
     ArrayList<String> MadicineName;
     String NAME;
+    public static String MNAME;
 
     public MyRecyclerViewAdapter(Context context, ArrayList<String> MadicineName, String NAME) {
         this.mInflater = LayoutInflater.from(context);
@@ -48,13 +49,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.medicineName.setText(MadicineName.get(position).toString());
         if (MadicineName.contains(NAME)) {
-            if (holder.medicineName.getText().equals(NAME)) {
+            if (holder.medicineName.getText().toString().equals(NAME)) {
+                MNAME=holder.medicineName.getText().toString();
                 holder.medicineName.setTextSize(25);
                 holder.medicineName.setTextColor(ContextCompat.getColor(mContext,
                         R.color.WHITE));
                 holder.medicineCV.setCardBackgroundColor(Color.parseColor("#5778e1"));
             }
         } else if (position == 0) {
+            MNAME=holder.medicineName.getText().toString();
             holder.medicineCV.setCardBackgroundColor(Color.parseColor("#5778e1"));
             holder.medicineName.setTextColor(ContextCompat.getColor(mContext,
                     R.color.WHITE));
@@ -93,6 +96,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             }
             for (TextView textView : TextViewList) {
                 if (TextViewList.get(getAdapterPosition()) == textView) {
+                    MNAME=textView.getText().toString();
                     textView.setTextSize(25);
                     textView.setTextColor(ContextCompat.getColor(mContext,
                             R.color.WHITE));

@@ -53,6 +53,8 @@ import java.util.Date;
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarListener;
 
+import static com.example.shipon.medicinereminder.adopter.MyRecyclerViewAdapter.MNAME;
+
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener, MyRecyclerViewAdapter.ItemClickListener {
     RecyclerView medicineRV;
     ArrayList<PendingIntent> intentArray = new ArrayList<PendingIntent>();
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     int day, month, year, hour, minute;
     boolean doubleBackToExitPressedOnce = false;
     final static int RQS_1 = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -308,21 +311,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         return super.onOptionsItemSelected(item);
     }
 
-    private void callAlarm() {
-        final Calendar cal = Calendar.getInstance();
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                year = i;
-                month = i1;
-                day = i2;
-                piker();
-            }
-        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
 
-
-    }
 
     private void setAlarm(Calendar targetCal) {
 
@@ -334,24 +323,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         intentArray.add(pendingIntent);
     }
 
-    private void piker() {
-        final Calendar current = Calendar.getInstance();
-        final Calendar cal = Calendar.getInstance();
-        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                hour = i;
-                minute = i1;
-                cal.set(year, month, day, hour, minute, 00);
-                if (cal.compareTo(current) <= 0) {
-                } else {
-                    setAlarm(cal);
-                }
-            }
-
-        }, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), false);
-        timePickerDialog.show();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -366,6 +337,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     @Override
     public void onItemClick(View view, int position) {
         medicineName = name.get(position);
-        callMainFragment(dateFormat, medicineName);
+        callMainFragment(dateFormat, MNAME);
     }
 }
