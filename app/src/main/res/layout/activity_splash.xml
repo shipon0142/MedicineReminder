@@ -9,6 +9,7 @@
     tools:context="com.example.shipon.medicinereminder.activity.SplashActivity">
 
     <ImageView
+        android:id="@+id/sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
