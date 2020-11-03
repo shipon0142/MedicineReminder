@@ -1,6 +1,5 @@
 package com.example.shipon.medicinereminder.activity;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -23,14 +22,11 @@ import android.widget.Toast;
 import com.example.shipon.medicinereminder.Class.Medicine;
 import com.example.shipon.medicinereminder.Class.TakenTime;
 import com.example.shipon.medicinereminder.R;
-import com.example.shipon.medicinereminder.adopter.MyRecyclerViewAdapter;
 import com.example.shipon.medicinereminder.adopter.ScheduleRecyclerViewAdapter;
 import com.example.shipon.medicinereminder.database.MedicineManagementDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddMedicineActivity extends AppCompatActivity {
     Toolbar toolbar;

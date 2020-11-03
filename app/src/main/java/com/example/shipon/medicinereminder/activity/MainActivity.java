@@ -2,23 +2,14 @@ package com.example.shipon.medicinereminder.activity;
 
 import android.os.Build;
 import android.os.Handler;
-import android.support.v4.app.NotificationCompat;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,17 +20,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.shipon.medicinereminder.Class.AlarmReceiver;
 import com.example.shipon.medicinereminder.Class.Medicine;
 import com.example.shipon.medicinereminder.Class.MedicinePerRow;
-import com.example.shipon.medicinereminder.Class.MyService;
 import com.example.shipon.medicinereminder.adopter.MyRecyclerViewAdapter;
 import com.example.shipon.medicinereminder.R;
 import com.example.shipon.medicinereminder.database.MedicineManagementDatabase;
@@ -115,18 +101,10 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         return Integer.parseInt(st3);
     }
 
-    public int getHour1(String time) {
-        int str1 = time.indexOf(":");
-        String st1 = time.substring(0, str1);
-        int h = Integer.parseInt(st1);
-        return h;
-    }
-
     public int getHour(String time) {
         int str1 = time.indexOf(":");
         String st1 = time.substring(0, str1);
         int h = Integer.parseInt(st1);
-        // if (h >= 12) h = h % 12;
         return h;
     }
 
@@ -147,17 +125,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                     , getDay(row.get(i).getMedicineTakenDate())
                     , getHour(row.get(i).getMedicineTime())
                     , getMin(row.get(i).getMedicineTime()), 00);
-            if (cal.compareTo(current) <= 0) {
-
-            } else {
-                setAlarm(cal);
-            }
         }
-    /*    ArrayList<PendingIntent> intentArray = new ArrayList<PendingIntent>();
-        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), RQS_1, intent, 0);
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);*/
     }
 
     private void callMainFragment(String date, String mName) {
@@ -191,24 +159,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
     @Override
     protected void onDestroy() {
-        AlarmReceiver MyService = new AlarmReceiver();
-        Intent mServiceIntent = new Intent(getApplicationContext(), MyService.getClass());
-        if (!isMyServiceRunning(MyService.getClass())) {
-            startService(mServiceIntent);
-        }
         super.onDestroy();
-    }
-
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                Log.i("isMyServiceRunning?", true + "");
-                return true;
-            }
-        }
-        Log.i("isMyServiceRunning?", false + "");
-        return false;
     }
 
     private void setMedicineOnRv(ArrayList<String> mName, String NAME) {
@@ -287,49 +238,10 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         });
     }
 
-    private String getCurrrentTime() {
-        String time = null;
-        Calendar now = Calendar.getInstance();
-        if (now.get(Calendar.AM_PM) == Calendar.AM) {
-            time = "" + now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE) + " AM";
-
-        } else {
-            time = "" + now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE) + " PM";
-        }
-        return time;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-
-        } else if (item.getItemId() == R.id.MedicineReviewID) {
-            Intent ii = new Intent(this, MedicinePreviewActivity.class);
-            startActivity(ii);
-        }
-
         return super.onOptionsItemSelected(item);
     }
-
-
-
-    private void setAlarm(Calendar targetCal) {
-
-        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
-        final int _id = (int) System.currentTimeMillis();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), _id, intent, PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
-        intentArray.add(pendingIntent);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
     @Override
     public void onFragmentInteraction(Uri uri) {
     }

@@ -1,8 +1,5 @@
 package com.example.shipon.medicinereminder.Class;
 
-/**
- * Created by Shipon on 8/21/2018.
- */
 
 public class TakenTime {
     private int hour;

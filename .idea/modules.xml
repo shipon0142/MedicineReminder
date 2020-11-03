@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MedicineReminder.iml" filepath="$PROJECT_DIR$/MedicineReminder.iml" />
-      <module fileurl="file://F:\MedicineReminder\Reminder.iml" filepath="F:\MedicineReminder\Reminder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MedicineReminderv2.iml" filepath="$PROJECT_DIR$/.idea/modules/MedicineReminderv2.iml" group="MedicineReminderv2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MedicineReminderv2-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MedicineReminderv2-app.iml" group="MedicineReminderv2/app" />
+      <module fileurl="file://$PROJECT_DIR$/../MedicineReminder/Reminder.iml" filepath="$PROJECT_DIR$/../MedicineReminder/Reminder.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

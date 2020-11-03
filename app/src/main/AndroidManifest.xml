@@ -10,39 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
-
-        </activity>
-        <activity
-            android:name=".activity.AddMedicineActivity"
-            android:parentActivityName=".activity.MainActivity" />
-        <activity
-            android:name=".activity.MedicinePreviewActivity"
-            android:parentActivityName=".activity.MainActivity" />
-
-        <service
-            android:name=".Class.MyService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <receiver
-            android:name=".Class.AlarmReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="ac.in.ActivityRecognition.RestartSensor" />
-            </intent-filter>
-        </receiver>
-
-        <activity android:name=".activity.SplashActivity">
-
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".activity.AddMedicineActivity"
+            android:parentActivityName=".activity.MainActivity" />
+
     </application>
 
 </manifest>

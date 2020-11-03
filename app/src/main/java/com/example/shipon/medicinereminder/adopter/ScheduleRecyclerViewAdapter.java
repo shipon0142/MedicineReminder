@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.shipon.medicinereminder.Class.TakenTime;
 import com.example.shipon.medicinereminder.R;
@@ -25,12 +24,10 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
     private LayoutInflater mInflater;
     private Context mContext;
-    // private ItemClickListener mClickListener;
     ArrayList<String> pickTimeList;
 
     public ScheduleRecyclerViewAdapter(Context context, ArrayList<String> pickTimeList) {
         this.mInflater = LayoutInflater.from(context);
-        //this.mClickListener =(ItemClickListener)context;
         this.pickTimeList = pickTimeList;
         this.mContext = context;
     }
@@ -110,9 +107,6 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
         @Override
         public void onClick(View view) {
-
-            //if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-
         }
     }
 

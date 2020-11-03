@@ -1,33 +1,20 @@
 package com.example.shipon.medicinereminder.adopter;
 
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.example.shipon.medicinereminder.Class.CustomDialogClass;
 import com.example.shipon.medicinereminder.Class.Medicine;
-import com.example.shipon.medicinereminder.Class.TakenTime;
 import com.example.shipon.medicinereminder.R;
-import com.example.shipon.medicinereminder.activity.MedicinePreviewActivity;
 import com.example.shipon.medicinereminder.database.MedicineManagementDatabase;
-import com.example.shipon.medicinereminder.fragment.MedicineDashboardFragment;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-
-import static com.example.shipon.medicinereminder.activity.AddMedicineActivity.takenTime;
 
 public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<MedicineDashboardRecyclerViewAdapter.ViewHolder> {
 
@@ -98,10 +85,7 @@ public class MedicineDashboardRecyclerViewAdapter extends RecyclerView.Adapter<M
                         .setNegativeButton(android.R.string.no, null).show();
 
             } else if (view.equals(updateTV)) {
-                CustomDialogClass cdd = new CustomDialogClass(mContext, medicine.get(getAdapterPosition()).getMedicineName()
-                        , medicine.get(getAdapterPosition()).getMedicineDuration());
 
-                cdd.show();
             }
 
             //if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());

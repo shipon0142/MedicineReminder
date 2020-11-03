@@ -29,9 +29,6 @@ import com.example.shipon.medicinereminder.database.MedicineManagementDatabase;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/**
- * Created by Shipon on 8/25/2018.
- */
 
 public class MedicineByDateAdopter extends RecyclerView.Adapter<MedicineByDateAdopter.ViewHolder> {
     Context mContext;
@@ -60,76 +57,6 @@ public class MedicineByDateAdopter extends RecyclerView.Adapter<MedicineByDateAd
         Calendar mcurrentTime = Calendar.getInstance();
         final int h = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         final int m = mcurrentTime.get(Calendar.MINUTE);
-        PopupMenu popup = new PopupMenu(mContext, holder.dotsIV);
-        popup.inflate(R.menu.takenornottaken);
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.TakenID:
-                        if (minut > -240.00 && minut <= 0) {
-                            MedicineManagementDatabase obj = new MedicineManagementDatabase(mContext);
-                            obj.updateTakenOrNotTaken(medicinePerRows.get(position).getMedicineName()
-                                    , medicinePerRows.get(position).getMedicineTakenDate()
-                                    , medicinePerRows.get(position).getMedicineTime(), 1);
-                            medicinePerRows.get(position).setMedicineTakenYesOrNo(1);
-                            notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(mContext, "You can't upate this now", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    case R.id.NotTakenID:
-                        if (minut > -240.00 && minut <= 0) {
-                            MedicineManagementDatabase obBj = new MedicineManagementDatabase(mContext);
-                            obBj.updateTakenOrNotTaken(medicinePerRows.get(position).getMedicineName()
-                                    , medicinePerRows.get(position).getMedicineTakenDate()
-                                    , medicinePerRows.get(position).getMedicineTime(), 0);
-                            medicinePerRows.get(position).setMedicineTakenYesOrNo(0);
-                            notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(mContext, "You can't upate this now", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    case R.id.ResuduleID:
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, final int i, final int i1) {
-                                final String takenTime = i + ":" + i1;
-                                new AlertDialog.Builder(mContext)
-                                        .setMessage("Do you really want to update time?")
-                                        .setIcon(android.R.drawable.ic_dialog_alert)
-                                        .setPositiveButton("All days", new DialogInterface.OnClickListener() {
-
-                                            public void onClick(DialogInterface dialog, int whichButton) {
-
-                                                MedicineManagementDatabase obj = new MedicineManagementDatabase(mContext);
-                                                obj.updateAllTime(takenTime, medicinePerRows.get(position).getMedicineTime(), medicinePerRows.get(position).getMedicineName());
-                                                medicinePerRows.get(position).setMedicineTime(takenTime);
-                                                notifyDataSetChanged();
-                                            }
-                                        })
-                                        .setNeutralButton("Cancel", null)
-                                        .setNegativeButton("This day", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                MedicineManagementDatabase obj = new MedicineManagementDatabase(mContext);
-                                                obj.updateTime(takenTime, medicinePerRows.get(position).getMedicineTime(), medicinePerRows.get(position).getMedicineName(), medicinePerRows.get(position).getMedicineTakenDate());
-                                                medicinePerRows.get(position).setMedicineTime(takenTime);
-                                                notifyDataSetChanged();
-                                            }
-                                        }).show();
-                            }
-                        }, h, m, false);
-                        timePickerDialog.show();
-
-
-                        break;
-                }
-                return false;
-
-            }
-        });
-        popup.show();
     }
 
     @SuppressLint("ResourceAsColor")
@@ -144,12 +71,6 @@ public class MedicineByDateAdopter extends RecyclerView.Adapter<MedicineByDateAd
         int index = medicine.indexOf(medicinePerRows.get(position).getMedicineName());
 
         holder.timeTV.setText(getTime1(position));
-        holder.dotsIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createPopup(holder, position);
-            }
-        });
         float hour = dayCounts(medicinePerRows.get(position).getMedicineTakenDate()
                 , medicinePerRows.get(position).getMedicineTime());
         minute = hour * 60;
@@ -158,8 +79,6 @@ public class MedicineByDateAdopter extends RecyclerView.Adapter<MedicineByDateAd
         int ii = medicinePerRows.get(position).getMedicineTakenYesOrNo();
 
         if (medicinePerRows.get(position).getMedicineTakenYesOrNo() == 1) {
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.green));
             holder.remainingTV.setText("Taken");
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.green));
@@ -167,56 +86,42 @@ public class MedicineByDateAdopter extends RecyclerView.Adapter<MedicineByDateAd
                     R.color.green));
         } else if (minute <= -240.00) {
 
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.red));
             holder.remainingTV.setText("Not Taken");
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.red));
             holder.timeTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.red));
         } else if (minute >= -10.00 && minute <= 0.00) {
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.WHITE));
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.WHITE));
             holder.remainingTV.setText("Time to take now " + mType);
             holder.timeTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.WHITE));
         } else if (minute > -60.00 && minute < -10.00) {
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.WHITE));
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.WHITE));
             holder.timeTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.WHITE));
             holder.remainingTV.setText((int) minute * -1 + " minutes passed. Take " + mType);
         } else if (minute > -240.00 && minute <= -60.00) {
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.WHITE));
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.WHITE));
             holder.timeTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.WHITE));
             holder.remainingTV.setText((int) hour * -1 + " hours passed. Take " + mType);
         } else if (minute <= 60.00) {
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.black));
             holder.timeTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.black));
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.black));
             holder.remainingTV.setText((int) minute + " minutes to take");
         } else if (hour <= 24.00) {
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.black));
             holder.timeTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.black));
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.black));
             holder.remainingTV.setText((int) hour + " hours to take");
         } else {
-            holder.dotsIV.setColorFilter(ContextCompat.getColor(mContext,
-                    R.color.black));
             holder.timeTV.setTextColor(ContextCompat.getColor(mContext,
                     R.color.black));
             holder.remainingTV.setTextColor(ContextCompat.getColor(mContext,
@@ -333,14 +238,13 @@ public class MedicineByDateAdopter extends RecyclerView.Adapter<MedicineByDateAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView timeTV, remainingTV;
-        ImageView dotsIV;
         LinearLayout medicineDateLinearLayout;
 
         ViewHolder(View itemView) {
             super(itemView);
             timeTV = itemView.findViewById(R.id.TimeTV);
             remainingTV = itemView.findViewById(R.id.RemainingTV);
-            dotsIV = itemView.findViewById(R.id.DotsIV);
+
             medicineDateLinearLayout = itemView.findViewById(R.id.MedicineDateLinearLayout);
 
         }
